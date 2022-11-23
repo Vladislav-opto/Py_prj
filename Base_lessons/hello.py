@@ -1,7 +1,7 @@
 name = "Владислав"
 
 print("Привет мир!")
-print("Привет программист!")
+print(f'Привет, {name}!')
 print(2 + 2)
-print(10/3)
+print(10 / 3)
 print(name)

@@ -7,7 +7,7 @@ def greet_user(update, context):
 
 def main():
     # Создаем бота и передаем ему ключ для авторизации на серверах Telegram
-    mybot = Updater("5941807026:AAHmB8Afi3zf7inQd00zUwtLD003MEL7Ozg", use_context=True)
+    mybot = Updater("", use_context=True) #не забудь добавить пароль!!!
     dp = mybot.dispatcher
     dp.add_handler(CommandHandler("start", greet_user))
     # Командуем боту начать ходить в Telegram за сообщениями
