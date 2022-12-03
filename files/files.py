@@ -1,10 +1,16 @@
-with open('referat.txt', 'r', encoding='utf-8') as referat_1:
-    data_from_file = referat_1.read()
-    len_file = len(data_from_file)
-    words_quantity = len(data_from_file.split())
+def len_qnt_file(my_file):
+    with open(my_file, 'r', encoding='utf-8') as my_file:
+        data_from_file = my_file.read()
+    print(f'Длина старого файла: {len(data_from_file)}')
+    print(f'Количество слов в старом файле: {len(data_from_file.split())}')
     data_from_file = data_from_file.replace('.', '!')
+    return(data_from_file)
 
-with open('referat2.txt', 'w', encoding='utf-8') as referat_2:
-    referat_2.write(f'Длина старого файла: {len_file}\n')
-    referat_2.write(f'Количество слов в старом файле: {words_quantity}\n')
-    referat_2.write(data_from_file)
+
+def write_to_file(my_file, data_from_file):
+    with open(my_file, 'w', encoding='utf-8') as my_file:
+        my_file.write(data_from_file)
+
+
+if __name__ == "__main__":
+    write_to_file('referat2.txt', len_qnt_file('referat.txt'))
