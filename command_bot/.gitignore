@@ -1,0 +1,9 @@
+settings.py
+*.log
+*.txt
+.vscode/
+env/
+__pycache__/
+/bot_repeater/env
+*.jpg
+*.json

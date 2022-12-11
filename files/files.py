@@ -3,7 +3,7 @@ def print_result(input_data: dict) -> None:
         print (f'{n}: {input_data[n]}')
 
 
-def replace_in_file(input_file: str) -> str:
+def replace_in_file(input_file) -> str:
     with open(input_file, 'r', encoding='utf-8') as file_handler:
         data_from_file = file_handler.read()
     data_from_file = data_from_file.replace('.', '!')
@@ -14,6 +14,8 @@ def len_qnt_words_file(input_file: str) -> str:
     dict_result = {}
     with open(input_file, 'r', encoding='utf-8') as file_handler:
         data_from_file = file_handler.read()
+    print(type(file_handler))
+    print(type(data_from_file))
     len_file = len(data_from_file)
     quantity_words = len(data_from_file.split())
     dict_result['Длина файла'] = len_file
