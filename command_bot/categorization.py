@@ -1,7 +1,7 @@
-import json, io, pprint
+import json, io
 
 
-def add_categories_to_file(input_category: io.TextIOWrapper, input_check: io.TextIOWrapper) -> io.TextIOWrapper:
+def add_categories_to_file(input_category: io.TextIOWrapper, input_check: io.TextIOWrapper) -> None:
     with open(input_category, "r", encoding='utf-8') as read_file:
         categories = json.load(read_file)
     with open(input_check, "r", encoding='utf-8') as read_file:
@@ -12,9 +12,10 @@ def add_categories_to_file(input_category: io.TextIOWrapper, input_check: io.Tex
         for category in categories:
             for word in good_as_list:
                 if word in categories[category]:
-                    check_verified[number]["категория"] = category
-    return check_verified
+                    check_verified[number]["category"] = category
+    with open("verified_check_with_categories.json", "w", encoding='utf-8') as write_file:
+        json.dump(check_verified, write_file, sort_keys=False, indent=4, ensure_ascii=False)
 
 
 if __name__ == "__main__":
-    pprint.pprint(add_categories_to_file("category.json", "verified_check.json"))
+    add_categories_to_file("category.json", "verified_check.json")

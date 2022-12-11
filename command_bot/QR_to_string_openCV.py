@@ -14,4 +14,4 @@ def read_qr_code(filename: str) -> str: #принимает на вход пут
 
 
 if __name__ == "__main__":
-    print(read_qr_code("\Photo_checks\IMG_20221211_162336.jpg"))
+    print(read_qr_code("IMG_20221211_162336.jpg"))
