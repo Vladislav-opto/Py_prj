@@ -1,10 +1,13 @@
-import logging, settings
+import logging, sys
+sys.path.append('../')
+import settings
 from telegram.ext import CommandHandler, Updater, MessageHandler, Filters
+from random import randint
 
 logging.basicConfig(filename='bot.log', level=logging.INFO)
 
 def greet_user(update, context) -> None:
-    update.message.reply_text('Привет, пользователь! Добро пожаловать ко мне - боту-помощнику с твоими покупками!')
+    update.message.reply_text('Привет! Я помогу тебе с покупками!')
 
 
 def talk_to_me(update, context) -> None:
@@ -12,10 +15,39 @@ def talk_to_me(update, context) -> None:
     update.message.reply_text(text)
 
 
+def play_random_numbers(user_number: int) -> str:
+    bot_number = randint(user_number - 10, user_number + 10)
+    if user_number > bot_number:
+        message = f'Ваше число {user_number}, мое {bot_number}, Вы выиграли!'
+    elif user_number == bot_number:
+        message = f'Ваше число {user_number}, мое {bot_number}, Ничья!'
+    else:
+        message = f'Ваше число {user_number}, мое {bot_number}, Вы проиграли!'
+    return message
+
+
+def send_cat_picture(update, context):
+    pass
+
+
+def guess_number(update, context) -> None:
+    if context.args:
+        try:
+            user_number = int(context.args[0])
+            message = play_random_numbers(user_number)
+        except (TypeError, ValueError):
+            message = 'Введите целое число!'
+    else:
+        message = 'Введите целое число!'
+    update.message.reply_text(message)
+
+
 def main_function() -> None:
     shopping_manager_bot = Updater(settings.API_KEY, use_context=True)
     dp = shopping_manager_bot.dispatcher
+    dp.add_handler(CommandHandler('guess', guess_number))
     dp.add_handler(CommandHandler('start', greet_user))
+    dp.add_handler(CommandHandler('cat', send_cat_picture))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
     logging.info('Бот стартовал!')
     shopping_manager_bot.start_polling()
