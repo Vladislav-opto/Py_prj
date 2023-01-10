@@ -1,13 +1,22 @@
+from emoji import emojize
 import logging, sys
 sys.path.append('../')
 import settings
 from telegram.ext import CommandHandler, Updater, MessageHandler, Filters
-from random import randint
+from random import choice, randint
 
 logging.basicConfig(filename='bot.log', level=logging.INFO)
 
 def greet_user(update, context) -> None:
-    update.message.reply_text('Привет! Я помогу тебе с покупками!')
+    context.user_data['emoji'] = get_smile(context.user_data)
+    update.message.reply_text(f'Привет! Я помогу тебе с покупками! {context.user_data["emoji"]}')
+
+
+def get_smile(user_data) -> str:
+    if 'emoji' not in user_data:
+        smile = choice(settings.USER_EMOJI)
+        return emojize(smile, language='alias')
+    return user_data['emoji']
 
 
 def talk_to_me(update, context) -> None:
@@ -24,10 +33,6 @@ def play_random_numbers(user_number: int) -> str:
     else:
         message = f'Ваше число {user_number}, мое {bot_number}, Вы проиграли!'
     return message
-
-
-def send_cat_picture(update, context):
-    pass
 
 
 def guess_number(update, context) -> None:
@@ -47,9 +52,7 @@ def main_function() -> None:
     dp = shopping_manager_bot.dispatcher
     dp.add_handler(CommandHandler('guess', guess_number))
     dp.add_handler(CommandHandler('start', greet_user))
-    dp.add_handler(CommandHandler('cat', send_cat_picture))
     dp.add_handler(MessageHandler(Filters.text, talk_to_me))
-    logging.info('Бот стартовал!')
     shopping_manager_bot.start_polling()
     shopping_manager_bot.idle()
 
