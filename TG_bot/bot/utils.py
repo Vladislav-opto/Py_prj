@@ -6,7 +6,14 @@ sys.path.append('../')
 import settings
 
 def main_keyboard():
-    return ReplyKeyboardMarkup([['Пришли смайлик!', KeyboardButton('Прислать мои координаты', request_location=True)]])
+    return ReplyKeyboardMarkup([
+        [
+            'Пришли смайлик!', KeyboardButton('Прислать мои координаты', request_location=True)
+        ], 
+        [
+            'Заполнить анкету'
+        ]
+    ])
 
 
 def get_smile(user_data: dict) -> str:
