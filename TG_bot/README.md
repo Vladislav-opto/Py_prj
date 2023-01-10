@@ -11,7 +11,7 @@ ShoppingManagerBot - телеграмм-бот, который помогает 
 5. Впишите в settings.py переменные:
 ```
 API_KEY = 'API-ключ бота'
-URL = "postgresql://cjpzyqur:oSZkJ8wmL8FFUG5Pn1gy1bywlsqAoslH@mel.db.elephantsql.com/cjpzyqur"
+URL = 'Ссылка на базу данных'
 USER_EMOJI = [":shit:", ":smile:", ":sunglasses:", ":eyes:"]
 ```
-6. Запустите бота командой `python boy.py`
+6. Запустите бота командой `python bot.py`
